@@ -1,0 +1,158 @@
+
+:root {
+    --primary: #2b6cb0;
+    --muted: #666;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: #222;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.site-header {
+    background: #f7f7f7;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+nav a,
+.link-btn {
+    margin-left: 10px;
+    text-decoration: none;
+    color: var(--muted);
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+}
+
+.auth-card {
+    max-width: 420px;
+    margin: 40px auto;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+.btn {
+    background: var(--primary);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid #ddd;
+}
+
+.btn.small {
+    padding: 6px 8px;
+    font-size: 0.9em;
+}
+
+.btn.danger {
+    background: #e53e3e;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+.table th,
+.table td {
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-summary {
+    padding: 12px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.post-full .content {
+    white-space: pre-wrap;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.alert {
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.alert.success {
+    background: #ecfdf5;
+    color: #065f46;
+}
+
+.error {
+    color: #b91c1c;
+    margin-top: 6px;
+}
+
+.site-footer {
+    margin-top: 30px;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #777;
+}
