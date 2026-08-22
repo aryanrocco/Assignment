@@ -21,6 +21,9 @@ class D3MoonSiteTest extends TestCase
         $response->assertSee('Securekloud');
         $response->assertSee('8.33%');
         $response->assertSee('Birlasoft');
+        $response->assertSee('CKA Birla Group');
+        $response->assertSee('Jocata');
+        $response->assertSee('Visit website');
     }
 
     public function test_briefing_request_requires_core_fields(): void

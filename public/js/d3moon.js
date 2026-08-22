@@ -74,6 +74,62 @@
         activate(nodes[0]);
     }
 
+    const clientTiles = document.querySelectorAll("[data-client]");
+    const dossier = {
+        logo: document.querySelector("[data-client-logo]"),
+        sector: document.querySelector("[data-client-sector]"),
+        name: document.querySelector("[data-client-name]"),
+        about: document.querySelector("[data-client-about]"),
+        link: document.querySelector("[data-client-link]"),
+    };
+
+    const showClient = (tile) => {
+        clientTiles.forEach((item) => {
+            item.classList.remove("active");
+            item.setAttribute("aria-selected", "false");
+        });
+        tile.classList.add("active");
+        tile.setAttribute("aria-selected", "true");
+        if (dossier.logo) {
+            dossier.logo.src = tile.dataset.logo || "";
+            dossier.logo.alt = `${tile.dataset.name || "Client"} logo`;
+        }
+        if (dossier.sector) dossier.sector.textContent = tile.dataset.sector || "";
+        if (dossier.name) dossier.name.textContent = tile.dataset.name || "";
+        if (dossier.about) dossier.about.textContent = tile.dataset.about || "";
+        if (dossier.link) {
+            dossier.link.href = tile.dataset.website || "#";
+            dossier.link.hidden = !tile.dataset.website;
+        }
+    };
+
+    clientTiles.forEach((tile) => {
+        tile.addEventListener("click", () => showClient(tile));
+    });
+
+    const openClientsFromHash = () => {
+        if (window.location.hash !== "#clients") {
+            return;
+        }
+        if (clientTiles[0] && !document.querySelector(".client-tile.active")) {
+            showClient(clientTiles[0]);
+        }
+        document.getElementById("clients")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    window.addEventListener("hashchange", openClientsFromHash);
+    openClientsFromHash();
+
+    document.querySelectorAll('a[href="#clients"]').forEach((link) => {
+        link.addEventListener("click", () => {
+            window.setTimeout(() => {
+                if (clientTiles[0]) {
+                    showClient(clientTiles[0]);
+                }
+            }, 0);
+        });
+    });
+
     if (new URLSearchParams(window.location.search).get("sent") === "1") {
         const form = document.querySelector("[data-briefing-form]");
         if (form && !form.querySelector(".flash")) {

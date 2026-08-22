@@ -372,6 +372,65 @@ section {
     line-height: 1;
 }
 
+#clients {
+    scroll-margin-top: 92px;
+}
+
+.client-stage {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 22px;
+    align-items: stretch;
+}
+
+.client-rail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.client-tile {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.client-tile img {
+    width: 100%;
+    height: 64px;
+    object-fit: cover;
+}
+
+.client-tile.active {
+    border-color: var(--signal);
+    box-shadow: 0 0 0 1px var(--signal);
+}
+
+.client-dossier {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 28px;
+}
+
+.client-dossier img {
+    width: min(100%, 320px);
+    height: auto;
+    border-radius: 14px;
+    margin-bottom: 16px;
+}
+
+.client-dossier h3 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    margin: 8px 0 12px;
+}
+
 .clients {
     display: flex;
     flex-wrap: wrap;
@@ -482,7 +541,8 @@ textarea {
     .grid-3,
     .terms,
     .partner,
-    .contact-grid {
+    .contact-grid,
+    .client-stage {
         grid-template-columns: 1fr;
     }
 

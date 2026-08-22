@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 72" role="img" aria-label="Jocata">
+  <rect width="280" height="72" rx="12" fill="#06241f"/>
+  <path d="M18 44c8-18 28-18 36 0" fill="none" stroke="#2ec9a0" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="36" cy="28" r="5" fill="#2ec9a0"/>
+  <text x="68" y="46" fill="#e7fff6" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="3">JOCATA</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 72" role="img" aria-label="Invisibl Cloud">
+  <rect width="280" height="72" rx="12" fill="#07161f"/>
+  <path d="M28 44c-8 0-12-6-10-12 2-6 8-8 14-6 2-8 16-10 20-2 8 0 12 8 8 14H28z" fill="#7ed0ff"/>
+  <text x="72" y="34" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">invisibl</text>
+  <text x="72" y="52" fill="#7ed0ff" font-family="Arial, Helvetica, sans-serif" font-size="12" letter-spacing="2">CLOUD</text>
+</svg>
