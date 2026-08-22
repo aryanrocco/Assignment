@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>D3Moon Consulting — Niche technology talent, ready to join</title>
+    <meta name="description" content="D3Moon Consulting delivers niche technology talent — quick joiners for product-based and technology-driven organizations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@330;400;580;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/d3moon.css">
+    <link rel="icon" href="images/d3moon-mark.svg" type="image/svg+xml">
+</head>
+<body class="d3moon">
+    <div class="sky" aria-hidden="true"><canvas id="starfield"></canvas></div>
+    <div class="wrap">
+        <header class="nav">
+            <a class="brand" href="./">
+                <img src="images/d3moon-mark.svg" alt="D3Moon mark">
+                <span class="brand-copy">
+                    <strong>D3MOON</strong>
+                    <span>Consulting</span>
+                </span>
+            </a>
+            <button class="menu-btn" type="button" data-menu aria-label="Open menu">Menu</button>
+            <nav class="nav-links" data-nav>
+                <a href="#focus">Focus</a>
+                <a href="#domains">Domains</a>
+                <a href="#clients">Clients</a>
+                <a href="#empanelment">Empanelment</a>
+                <a class="cta" href="#briefing">Request a briefing</a>
+            </nav>
+        </header>
+        <main>
+            <section class="hero" id="top">
+                <div>
+                    <p class="kicker">Specialized recruitment partner</p>
+                    <h1>Talent that lands before the launch window closes.</h1>
+                    <p class="lede">
+                        D3Moon is a specialized recruitment partner focused on delivering high-quality niche technology talent to product-based and technology-driven organizations. We understand the urgency and precision required in hiring for emerging and critical skills.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="cta" href="#briefing">Explore vendor empanelment</a>
+                        <a class="ghost" href="#domains">Browse the talent sky</a>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <b>Quick joiners</b>
+                            <span>Primary focus: people who can accelerate delivery now.</span>
+                        </div>
+                        <div class="metric">
+                            <b>8.33%</b>
+                            <span>Transparent commercial terms on successful closures.</span>
+                        </div>
+                        <div class="metric">
+                            <b>30 days</b>
+                            <span>Payment cycle designed for a clean partnership rhythm.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="observatory" aria-hidden="true">
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring inner"></div>
+                    <div class="moon-core">
+                        <img src="images/d3moon-mark.svg" alt="">
+                    </div>
+                    <button class="star-node" style="left:18%;top:28%" data-domain data-name="Full Stack &amp; Development" data-summary="Builders who can ship product, not just tickets." data-roles="Java Full Stack Developers|UI Full Stack (React, Angular, NodeJS)|Python Developers" data-label="Full Stack" type="button"></button>
+                    <button class="star-node" style="left:82%;top:22%" data-domain data-name="Data &amp; AI" data-summary="Emerging skills hired with precision and urgency." data-roles="Data Science|RAG (Retrieval Augmented Generation)|Generative AI|Agentic AI|Machine Learning Engineers" data-label="Data &amp; AI" type="button"></button>
+                    <button class="star-node" style="left:88%;top:62%" data-domain data-name="Cloud &amp; DevOps" data-summary="Architects and operators who keep go-to-market on schedule." data-roles="AWS Specialists &amp; Architects|Azure Specialists &amp; Architects|GCP Specialists &amp; Architects|Cloud DevOps Engineers" data-label="Cloud" type="button"></button>
+                    <button class="star-node" style="left:48%;top:12%" data-domain data-name="Enterprise Platforms" data-summary="Niche platform talent for complex delivery programs." data-roles="Salesforce Developers &amp; Architects|Mulesoft Developers|Oracle Functional &amp; Technical Consultants" data-label="Enterprise" type="button"></button>
+                    <button class="star-node" style="left:22%;top:74%" data-domain data-name="Quality &amp; Experience" data-summary="The last mile that makes products shippable." data-roles="Testing (Manual, Automation, Performance)|UX/UI Designers" data-label="Quality" type="button"></button>
+                </div>
+            </section>
+
+            <section id="focus">
+                <div class="section-head">
+                    <p class="kicker">Why D3Moon</p>
+                    <h2>Urgency, without compromising the brief.</h2>
+                    <p>Our primary focus is on quick joiners who can accelerate project delivery and help businesses meet their go-to-market timelines efficiently.</p>
+                </div>
+                <div class="grid-3">
+                    <article class="panel">
+                        <h3>Niche, not generic</h3>
+                        <p>We hire for emerging and critical skills — RAG, Agentic AI, multi-cloud architecture, Salesforce, Mulesoft, Oracle — the roles product organizations actually stall on.</p>
+                    </article>
+                    <article class="panel">
+                        <h3>Precision matching</h3>
+                        <p>We understand the urgency and precision required in hiring. Shortlists are built for the stack, the product context, and the join date — not a volume dump.</p>
+                    </article>
+                    <article class="panel">
+                        <h3>Repeat engagement</h3>
+                        <p>Clients come back because delivery holds. Quality of talent and reliability of process are how we earn a place in your TA ecosystem.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="domains">
+                <div class="section-head">
+                    <p class="kicker">Technology domains</p>
+                    <h2>A sky of scarce skills, mapped.</h2>
+                    <p>Select a star on the observatory — or tap a domain below — to see the roles we specialize in.</p>
+                </div>
+                <div class="constellation-stage">
+                    <div class="domain-card">
+                        <p class="kicker">Active constellation</p>
+                        <h3 data-domain-title>Full Stack &amp; Development</h3>
+                        <p data-domain-summary>Builders who can ship product, not just tickets.</p>
+                        <div class="chip-row" data-domain-roles></div>
+                    </div>
+                    <div class="grid-3" style="grid-template-columns:1fr">
+                        <button class="panel" type="button" data-domain data-name="Full Stack &amp; Development" data-summary="Builders who can ship product, not just tickets." data-roles="Java Full Stack Developers|UI Full Stack (React, Angular, NodeJS)|Python Developers" style="text-align:left;cursor:pointer;width:100%;color:inherit">
+                            <h3>Full Stack &amp; Development</h3>
+                            <p>Builders who can ship product, not just tickets.</p>
+                        </button>
+                        <button class="panel" type="button" data-domain data-name="Data &amp; AI" data-summary="Emerging skills hired with precision and urgency." data-roles="Data Science|RAG (Retrieval Augmented Generation)|Generative AI|Agentic AI|Machine Learning Engineers" style="text-align:left;cursor:pointer;width:100%;color:inherit">
+                            <h3>Data &amp; AI</h3>
+                            <p>Emerging skills hired with precision and urgency.</p>
+                        </button>
+                        <button class="panel" type="button" data-domain data-name="Cloud &amp; DevOps" data-summary="Architects and operators who keep go-to-market on schedule." data-roles="AWS Specialists &amp; Architects|Azure Specialists &amp; Architects|GCP Specialists &amp; Architects|Cloud DevOps Engineers" style="text-align:left;cursor:pointer;width:100%;color:inherit">
+                            <h3>Cloud &amp; DevOps</h3>
+                            <p>Architects and operators who keep go-to-market on schedule.</p>
+                        </button>
+                        <button class="panel" type="button" data-domain data-name="Enterprise Platforms" data-summary="Niche platform talent for complex delivery programs." data-roles="Salesforce Developers &amp; Architects|Mulesoft Developers|Oracle Functional &amp; Technical Consultants" style="text-align:left;cursor:pointer;width:100%;color:inherit">
+                            <h3>Enterprise Platforms</h3>
+                            <p>Niche platform talent for complex delivery programs.</p>
+                        </button>
+                        <button class="panel" type="button" data-domain data-name="Quality &amp; Experience" data-summary="The last mile that makes products shippable." data-roles="Testing (Manual, Automation, Performance)|UX/UI Designers" style="text-align:left;cursor:pointer;width:100%;color:inherit">
+                            <h3>Quality &amp; Experience</h3>
+                            <p>The last mile that makes products shippable.</p>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-head">
+                    <p class="kicker">Engagement protocol</p>
+                    <h2>Clear commercials. No fog on the terms.</h2>
+                </div>
+                <div class="terms">
+                    <div class="term-plaque">
+                        <div class="num">8.33%</div>
+                        <h3>Success fee</h3>
+                        <p>We work for 8.33% — a simple, competitive structure that keeps the partnership focused on closures that actually join.</p>
+                    </div>
+                    <div class="term-plaque">
+                        <div class="num">30</div>
+                        <h3>Day payment cycle</h3>
+                        <p>Payment in 30 days. Predictable for finance, frictionless for talent acquisition, built for long-term empanelment.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="clients">
+                <div class="section-head">
+                    <p class="kicker">Current clientele</p>
+                    <h2>Trusted by technology-driven organizations.</h2>
+                    <p>Open a company to read a short briefing. Repeat engagement with these organizations reflects our commitment to quality and delivery excellence.</p>
+                </div>
+                <div class="client-stage">
+                    <div class="client-rail" role="tablist" aria-label="Clients">
+                        <button class="client-tile active" type="button" role="tab" aria-selected="true" data-client data-name="Birlasoft" data-sector="Enterprise digital transformation" data-about="A CKA Birla Group technology company that helps global enterprises modernize with cloud, AI, data, and enterprise applications. Birlasoft pairs industry depth with digital engineering so programs move at the speed product teams need." data-website="https://www.birlasoft.com" data-logo="images/clients/birlasoft.svg">
+                            <img src="images/clients/birlasoft.svg" alt=""><span>Birlasoft</span>
+                        </button>
+                        <button class="client-tile" type="button" role="tab" aria-selected="false" data-client data-name="Jocata" data-sector="Digital lending &amp; credit decisioning" data-about="A fintech platform company that digitizes lending, KYC, credit underwriting, and compliance workflows for banks and NBFCs. Jocata is built for institutions that need faster, cleaner credit decisions without losing control." data-website="https://jocata.com" data-logo="images/clients/jocata.svg">
+                            <img src="images/clients/jocata.svg" alt=""><span>Jocata</span>
+                        </button>
+                        <button class="client-tile" type="button" role="tab" aria-selected="false" data-client data-name="Intellect Design Arena" data-sector="AI-first banking &amp; open finance" data-about="A global financial-technology product company serving banks, insurers, and capital-markets firms. Intellect builds composable, AI-first platforms across retail and corporate banking, treasury, liquidity, and insurance." data-website="https://www.intellectdesign.com" data-logo="images/clients/intellect.svg">
+                            <img src="images/clients/intellect.svg" alt=""><span>Intellect Design Arena</span>
+                        </button>
+                        <button class="client-tile" type="button" role="tab" aria-selected="false" data-client data-name="Presidio" data-sector="Cloud, AI &amp; digital solutions" data-about="A digital technology solutions partner that designs, builds, and manages cloud, security, and AI estates for enterprises. Presidio is known for taking complex infrastructure programs from architecture through run-state." data-website="https://www.presidio.com" data-logo="images/clients/presidio.svg">
+                            <img src="images/clients/presidio.svg" alt=""><span>Presidio</span>
+                        </button>
+                        <button class="client-tile" type="button" role="tab" aria-selected="false" data-client data-name="Desicrew" data-sector="Impact sourcing &amp; rural BPO" data-about="An impact-sourcing company that delivers business-process and technology support from rural and semi-urban talent centers in India. Desicrew combines operational quality with a model that creates skilled jobs outside metro cities." data-website="https://desicrew.in" data-logo="images/clients/desicrew.svg">
+                            <img src="images/clients/desicrew.svg" alt=""><span>Desicrew</span>
+                        </button>
+                        <button class="client-tile" type="button" role="tab" aria-selected="false" data-client data-name="Clayfin" data-sector="Digital banking experience" data-about="A digital-banking specialist that helps financial institutions design and deliver customer-facing journeys — onboarding, servicing, and omnichannel engagement — on modern experience platforms." data-website="https://www.clayfin.com" data-logo="images/clients/clayfin.svg">
+                            <img src="images/clients/clayfin.svg" alt=""><span>Clayfin</span>
+                        </button>
+                        <button class="client-tile" type="button" role="tab" aria-selected="false" data-client data-name="Invisibl Cloud" data-sector="Cloud-native platforms" data-about="A cloud-native technology firm focused on building and operating modern infrastructure, platform engineering, and cloud delivery for product and enterprise teams that need reliable scale." data-website="https://invisiblcloud.com" data-logo="images/clients/invisibl.svg">
+                            <img src="images/clients/invisibl.svg" alt=""><span>Invisibl Cloud</span>
+                        </button>
+                    </div>
+                    <article class="client-dossier" data-client-dossier>
+                        <div class="client-mark">
+                            <img data-client-logo src="images/clients/birlasoft.svg" alt="">
+                        </div>
+                        <div>
+                            <p class="kicker" data-client-sector>Enterprise digital transformation</p>
+                            <h3 data-client-name>Birlasoft</h3>
+                            <p class="lede" data-client-about>A CKA Birla Group technology company that helps global enterprises modernize with cloud, AI, data, and enterprise applications. Birlasoft pairs industry depth with digital engineering so programs move at the speed product teams need.</p>
+                            <a class="ghost" data-client-link href="https://www.birlasoft.com" target="_blank" rel="noreferrer">Visit website</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="empanelment">
+                <div class="partner">
+                    <div>
+                        <p class="kicker">Vendor empanelment</p>
+                        <h2>Ready to add value to Securekloud’s talent acquisition ecosystem.</h2>
+                        <p>We would be honored to explore a vendor empanelment opportunity with Securekloud and demonstrate how D3Moon can supply niche, quick-joining technology talent against your most urgent product timelines.</p>
+                    </div>
+                    <div>
+                        <a class="cta" href="#briefing">Propose a time to connect</a>
+                        <p style="color:var(--mute);margin-top:16px">Looking forward to the possibility of collaborating with your team.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="briefing" class="contact-grid">
+                <div>
+                    <p class="kicker">Mission control</p>
+                    <div class="person">
+                        <img src="images/d3moon-mark.svg" alt="" width="64" height="64">
+                        <div>
+                            <p class="sig">Vinoth Kumar</p>
+                            <p>Managing Director — D3Moon Consulting</p>
+                        </div>
+                    </div>
+                    <p>
+                        <a href="mailto:vinkumar@d3moon.com">vinkumar@d3moon.com</a><br>
+                        <a href="tel:+919080308811">+91 9080308811</a>
+                    </p>
+                    <p class="lede">Tell us a convenient time to connect. We will come prepared with a domain map aligned to your open critical skills.</p>
+                </div>
+                <form class="panel" data-briefing-form action="https://formsubmit.co/vinkumar@d3moon.com" method="POST">
+                    <input type="hidden" name="_subject" value="D3Moon briefing request">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <label>Name
+                        <input name="name" required>
+                    </label>
+                    <label>Company
+                        <input name="company" required>
+                    </label>
+                    <label>Work email
+                        <input type="email" name="email" required>
+                    </label>
+                    <label>Phone
+                        <input name="phone" placeholder="+91">
+                    </label>
+                    <label>Convenient window
+                        <select name="window">
+                            <option value="">Select a window</option>
+                            <option>Weekday morning IST</option>
+                            <option>Weekday afternoon IST</option>
+                            <option>Weekday evening IST</option>
+                        </select>
+                    </label>
+                    <label>How can we help
+                        <textarea name="message" required></textarea>
+                    </label>
+                    <button class="cta" type="submit">Send briefing request</button>
+                </form>
+            </section>
+        </main>
+        <footer class="footer">
+            <div>© 2026 D3Moon Consulting. Niche technology talent, delivered with urgency.</div>
+            <div>
+                <a href="mailto:vinkumar@d3moon.com">vinkumar@d3moon.com</a>
+                ·
+                <a href="tel:+919080308811">+91 9080308811</a>
+            </div>
+        </footer>
+    </div>
+    <script src="js/d3moon.js"></script>
+</body>
+</html>

@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="text-center mb-12">
-  <h1 class="text-5xl font-extrabold text-gray-800">Our Articles</h1>
-  <p class="text-gray-600 mt-3">Latest articles, news & stories</p>
+  <h1 class="text-5xl font-extrabold text-cyan-100">Insights</h1>
+  <p class="text-slate-400 mt-3">Notes from the D3Moon talent observatory</p>
 </div>
 
 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

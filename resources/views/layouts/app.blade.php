@@ -2,59 +2,49 @@
 <html lang="en" class="h-full">
 <head>
   <meta charset="utf-8">
-  <title>@yield('title', 'Content Management System (CMS)')</title>
+  <title>@yield('title', 'D3Moon Consulting')</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body class="h-full flex flex-col bg-gray-50 text-gray-800 font-sans">
-
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md">
+<body class="h-full flex flex-col bg-slate-950 text-slate-100 font-sans">
+  <nav class="bg-slate-950/90 border-b border-cyan-900/40">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <!-- Logo -->
-      <a href="{{ url('/') }}" class="text-2xl font-extrabold text-cyan-600">
-        Content Management System (CMS)
+      <a href="{{ url('/') }}" class="text-xl font-extrabold tracking-[0.18em] text-cyan-300">
+        D3MOON
       </a>
-
-      <!-- Links -->
-      <div class="space-x-6 hidden md:flex">
-        <a href="{{ url('/') }}" class="text-gray-700 hover:text-cyan-600 transition">Home</a>
-
+      <div class="space-x-6 hidden md:flex items-center">
+        <a href="{{ url('/') }}" class="text-slate-200 hover:text-cyan-300 transition">Home</a>
+        <a href="{{ route('blog.index') }}" class="text-slate-200 hover:text-cyan-300 transition">Insights</a>
         @auth
-          <a href="{{ route('admin.posts.index') }}" class="text-gray-700 hover:text-cyan-600 transition">Dashboard</a>
+          <a href="{{ route('admin.posts.index') }}" class="text-slate-200 hover:text-cyan-300 transition">Dashboard</a>
           <form action="{{ route('logout') }}" method="POST" class="inline">
             @csrf
-            <button type="submit" class="text-gray-700 hover:text-red-500 transition">Logout</button>
+            <button type="submit" class="text-slate-200 hover:text-red-400 transition">Logout</button>
           </form>
         @else
-          <a href="{{ route('login') }}" class="text-gray-700 hover:text-cyan-600 transition">Login</a>
+          <a href="{{ route('login') }}" class="text-slate-200 hover:text-cyan-300 transition">Login</a>
         @endauth
       </div>
     </div>
   </nav>
 
-  <!-- Main Content -->
   <main class="flex-grow max-w-7xl mx-auto px-6 py-10 w-full">
     @if(session('success'))
-      <div class="mb-4 p-4 rounded bg-green-100 text-green-700">
+      <div class="mb-4 p-4 rounded bg-cyan-950 text-cyan-100 border border-cyan-700">
         {{ session('success') }}
       </div>
     @endif
     @yield('content')
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-gradient-to-r from-sky-100 via-cyan-100 to-emerald-100 mt-auto">
+  <footer class="bg-slate-950 border-t border-cyan-900/40 mt-auto">
     <div class="max-w-7xl mx-auto px-6 py-8 text-center">
-      <p class="text-gray-700 font-medium">© {{ date('Y') }} Simple CMS. All rights reserved.</p>
-      <p class="text-gray-500 text-sm mt-1">Built with Laravel & Tailwind CSS</p>
+      <p class="text-slate-200 font-medium">© {{ date('Y') }} D3Moon Consulting. All rights reserved.</p>
+      <p class="text-slate-400 text-sm mt-1">Niche technology talent for product-driven teams</p>
     </div>
   </footer>
 
-  <!-- AOS Script -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init({ duration: 800, once: true });</script>
 </body>
