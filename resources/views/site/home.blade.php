@@ -152,7 +152,7 @@
             </p>
             <p class="lede">Tell us a convenient time to connect. We will come prepared with a domain map aligned to your open critical skills.</p>
         </div>
-        <form class="panel" method="POST" action="{{ route('contact.store') }}">
+        <form class="panel" data-briefing-form method="POST" action="{{ route('contact.store') }}">
             @csrf
             @if (session('briefing'))
                 <div class="flash">{{ session('briefing') }}</div>

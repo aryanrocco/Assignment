@@ -73,4 +73,14 @@
     if (nodes[0]) {
         activate(nodes[0]);
     }
+
+    if (new URLSearchParams(window.location.search).get("sent") === "1") {
+        const form = document.querySelector("[data-briefing-form]");
+        if (form && !form.querySelector(".flash")) {
+            const flash = document.createElement("div");
+            flash.className = "flash";
+            flash.textContent = "Thank you. Vinoth will confirm a convenient time to connect.";
+            form.prepend(flash);
+        }
+    }
 })();
