@@ -3,7 +3,7 @@
 @section('title','Admin Login')
 
 @section('content')
-<div class="flex items-center justify-center min-h-screen bg-gray-50">
+<div class="flex items-center justify-center py-12">
   <div data-aos="zoom-in" 
        class="w-full max-w-md bg-gradient-to-br from-sky-100 via-cyan-100 to-emerald-100 
               rounded-3xl shadow-xl p-10 border border-gray-200">
