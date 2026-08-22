@@ -1,34 +1,32 @@
-name: Deploy GitHub Pages
+name: Publish static site
 
 on:
   push:
     branches:
-      - cursor/kolkata-date-planner-2a6b
       - main
-    paths:
-      - 'docs/**'
-      - '.github/workflows/pages.yml'
+      - cursor/kolkata-date-planner-2a6b
+  workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: gh-pages-publish
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: docs
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
