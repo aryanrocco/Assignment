@@ -17,6 +17,9 @@ class GitHubPagesSiteTest extends TestCase
         $this->assertStringContainsString('vinkumar@d3moon.com', $html);
         $this->assertStringContainsString('Securekloud', $html);
         $this->assertStringContainsString('css/d3moon.css', $html);
+        $this->assertFileExists(dirname(__DIR__, 2).'/docs/css/d3moon.css');
+        $this->assertFileExists(dirname(__DIR__, 2).'/docs/js/d3moon.js');
+        $this->assertFileExists(dirname(__DIR__, 2).'/docs/images/d3moon-mark.svg');
         $this->assertFileExists(dirname(__DIR__, 2).'/public/css/d3moon.css');
         $this->assertFileExists(dirname(__DIR__, 2).'/public/images/d3moon-mark.svg');
     }
