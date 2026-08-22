@@ -113,7 +113,7 @@
         <div class="section-head">
             <p class="kicker">Current clientele</p>
             <h2>Trusted by technology-driven organizations.</h2>
-            <p>Select a client to see the mark and a short briefing on who they are. Repeat engagement with these organizations reflects our commitment to quality and delivery excellence.</p>
+            <p>Open a company to read a short briefing. Repeat engagement with these organizations reflects our commitment to quality and delivery excellence.</p>
         </div>
         <div class="client-stage">
             <div class="client-rail" role="tablist" aria-label="Clients">
@@ -130,17 +130,22 @@
                         data-website="{{ $client['website'] }}"
                         data-logo="{{ asset($client['logo']) }}"
                     >
-                        <img src="{{ asset($client['logo']) }}" alt="{{ $client['name'] }} logo">
+                        <img src="{{ asset($client['logo']) }}" alt="">
+                        <span>{{ $client['name'] }}</span>
                     </button>
                 @endforeach
             </div>
             @php $featured = $clients[0]; @endphp
             <article class="client-dossier" data-client-dossier>
-                <img data-client-logo src="{{ asset($featured['logo']) }}" alt="{{ $featured['name'] }} logo">
-                <p class="kicker" data-client-sector>{{ $featured['sector'] }}</p>
-                <h3 data-client-name>{{ $featured['name'] }}</h3>
-                <p data-client-about>{{ $featured['about'] }}</p>
-                <a class="ghost" data-client-link href="{{ $featured['website'] }}" target="_blank" rel="noreferrer">Visit website</a>
+                <div class="client-mark">
+                    <img data-client-logo src="{{ asset($featured['logo']) }}" alt="">
+                </div>
+                <div>
+                    <p class="kicker" data-client-sector>{{ $featured['sector'] }}</p>
+                    <h3 data-client-name>{{ $featured['name'] }}</h3>
+                    <p class="lede" data-client-about>{{ $featured['about'] }}</p>
+                    <a class="ghost" data-client-link href="{{ $featured['website'] }}" target="_blank" rel="noreferrer">Visit website</a>
+                </div>
             </article>
         </div>
     </section>
