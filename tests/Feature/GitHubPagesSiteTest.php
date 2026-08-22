@@ -17,6 +17,9 @@ class GitHubPagesSiteTest extends TestCase
         $this->assertStringContainsString('Movie Date', $html);
         $this->assertStringContainsString('Flurys', $html);
         $this->assertFileExists(dirname(__DIR__, 2).'/docs/dates.json');
-        $this->assertFileExists(dirname(__DIR__, 2).'/docs/.nojekyll');
+        $this->assertFileExists(dirname(__DIR__, 2).'/docs/images/hero.jpg');
+        $this->assertFileExists(dirname(__DIR__, 2).'/docs/images/flurys.jpg');
+        $this->assertStringContainsString("images/hero.jpg", $html);
+        $this->assertStringNotContainsString('unsplash.com', $html);
     }
 }
