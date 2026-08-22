@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Kolkata Date</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            sans: ['Outfit', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            roseink: '#4a1c2a',
+            blush: '#f8e7ea',
+            petal: '#d4788b',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(212, 120, 139, 0.18), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(124, 58, 237, 0.10), transparent 50%),
+        #fff7f5;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-roseink font-sans antialiased">
+  <header class="max-w-6xl mx-auto px-5 py-6 flex items-center justify-between">
+    <a href="#/" class="flex items-baseline gap-2">
+      <span class="text-2xl font-display italic">Our Kolkata Date</span>
+      <span class="hidden sm:inline text-xs tracking-[0.2em] uppercase text-petal">pick a day · a time · a place</span>
+    </a>
+    <nav class="flex items-center gap-5 text-sm">
+      <a href="#/" class="hover:text-petal transition">Categories</a>
+      <a href="#/our-dates" class="hover:text-petal transition">Our plans</a>
+    </nav>
+  </header>
+  <main id="app" class="max-w-6xl mx-auto px-5 pb-16"></main>
+  <footer class="max-w-6xl mx-auto px-5 pb-10 text-center text-sm text-roseink/50">
+    Made for wandering Kolkata together.
+  </footer>
+  <script>
+    const STORAGE_KEY = 'kolkata-date-plans';
+    let catalog = null;
+
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const escapeHtml = (value) => String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
+
+    const loadPlans = () => {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    };
+
+    const savePlans = (plans) => localStorage.setItem(STORAGE_KEY, JSON.stringify(plans));
+
+    const formatDay = (iso) => {
+      const date = new Date(iso + 'T12:00:00');
+      return date.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    };
+
+    const formatDayLong = (iso) => {
+      const date = new Date(iso + 'T12:00:00');
+      return date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    };
+
+    const formatTime = (hhmm) => {
+      const [h, m] = hhmm.split(':').map(Number);
+      const date = new Date();
+      date.setHours(h, m);
+      return date.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
+    };
+
+    const todayIso = () => {
+      const now = new Date();
+      const offset = now.getTimezoneOffset();
+      const local = new Date(now.getTime() - offset * 60000);
+      return local.toISOString().slice(0, 10);
+    };
+
+    const pathParts = () => location.hash.replace(/^#/, '').split('/').filter(Boolean);
+
+    const renderHome = () => {
+      const plans = loadPlans().slice().reverse().slice(0, 3);
+      const cards = Object.entries(catalog.categories).map(([slug, category]) => `
+        <a href="#/plan/${slug}" class="glass group rounded-3xl p-6 border border-white/80 shadow-sm hover:-translate-y-1 hover:shadow-lg transition">
+          <div class="text-3xl mb-4">${category.emoji}</div>
+          <h2 class="font-display text-2xl">${escapeHtml(category.name)}</h2>
+          <p class="mt-2 text-sm text-roseink/65 leading-relaxed">${escapeHtml(category.blurb)}</p>
+          <p class="mt-4 text-xs uppercase tracking-widest text-petal group-hover:underline">${Object.keys(category.places).length} places</p>
+        </a>
+      `).join('');
+
+      const latest = plans.length ? `
+        <section class="mt-14">
+          <div class="flex items-end justify-between mb-5">
+            <h2 class="font-display text-3xl">Latest plans</h2>
+            <a href="#/our-dates" class="text-sm text-petal hover:underline">See all</a>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4">
+            ${plans.map((plan) => `
+              <a href="#/dates/${plan.id}" class="rounded-2xl bg-white/80 border border-rose-100 p-5 hover:border-petal/40 transition">
+                <p class="text-xs uppercase tracking-widest text-petal">${escapeHtml(plan.category_name)}</p>
+                <p class="font-display text-xl mt-1">${escapeHtml(plan.place_name)}</p>
+                <p class="text-sm text-roseink/60 mt-2">${formatDay(plan.planned_on)} · ${formatTime(plan.planned_at)}</p>
+              </a>
+            `).join('')}
+          </div>
+        </section>
+      ` : '';
+
+      return `
+        <section class="text-center pt-6 pb-12">
+          <p class="uppercase tracking-[0.35em] text-xs text-petal mb-4">Kolkata · just us</p>
+          <h1 class="font-display text-5xl sm:text-7xl leading-tight">${escapeHtml(catalog.couple_title)}</h1>
+          <p class="mt-5 max-w-xl mx-auto text-lg text-roseink/70">${escapeHtml(catalog.tagline)}</p>
+          <p class="mt-3 text-sm text-roseink/50">Choose a kind of date. Then pick a place, a day, and a time.</p>
+        </section>
+        <section class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">${cards}</section>
+        ${latest}
+      `;
+    };
+
+    const renderCategory = (slug) => {
+      const category = catalog.categories[slug];
+      if (!category) return `<p>That category is not on the list.</p>`;
+      const places = Object.entries(category.places).map(([placeSlug, place]) => `
+        <a href="#/plan/${slug}/${placeSlug}" class="glass rounded-3xl p-6 border border-white shadow-sm hover:-translate-y-0.5 hover:shadow-md transition">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h2 class="font-display text-2xl">${escapeHtml(place.name)}</h2>
+              <p class="text-sm text-petal mt-1">${escapeHtml(place.area)}</p>
+            </div>
+            <span class="text-xs uppercase tracking-widest text-roseink/40">Kolkata</span>
+          </div>
+          <p class="mt-3 text-sm text-roseink/70 leading-relaxed">${escapeHtml(place.note)}</p>
+          <p class="mt-4 text-sm font-medium text-roseink">Choose day & time →</p>
+        </a>
+      `).join('');
+
+      return `
+        <div class="mb-8">
+          <a href="#/" class="text-sm text-petal hover:underline">← All categories</a>
+          <p class="mt-6 text-4xl">${category.emoji}</p>
+          <h1 class="font-display text-5xl mt-2">${escapeHtml(category.name)}</h1>
+          <p class="mt-3 max-w-2xl text-roseink/70">${escapeHtml(category.blurb)}</p>
+          <p class="mt-2 text-sm text-roseink/50">Tap a place in Kolkata, then choose the day and time.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">${places}</div>
+      `;
+    };
+
+    const renderCreate = (categorySlug, placeSlug) => {
+      const category = catalog.categories[categorySlug];
+      const place = category?.places?.[placeSlug];
+      if (!place) return `<p>That place is not on the list.</p>`;
+      return `
+        <div class="max-w-2xl mx-auto">
+          <a href="#/plan/${categorySlug}" class="text-sm text-petal hover:underline">← Other ${escapeHtml(category.name.toLowerCase())}s</a>
+          <div class="glass rounded-3xl p-8 mt-6 border border-white shadow-sm">
+            <p class="text-xs uppercase tracking-[0.25em] text-petal">${category.emoji} ${escapeHtml(category.name)}</p>
+            <h1 class="font-display text-4xl mt-3">${escapeHtml(place.name)}</h1>
+            <p class="text-petal mt-1">${escapeHtml(place.area)}, Kolkata</p>
+            <p class="mt-3 text-roseink/70">${escapeHtml(place.note)}</p>
+            <form id="date-form" class="mt-8 space-y-5">
+              <p id="form-error" class="hidden rounded-2xl bg-rose-100 text-rose-800 px-4 py-3 text-sm"></p>
+              <div>
+                <label class="block text-sm font-medium mb-1">Your name <span class="text-roseink/40 font-normal">(optional)</span></label>
+                <input name="planner_name" type="text" maxlength="80" placeholder="So I know who locked this in"
+                  class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40">
+              </div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium mb-1">Day</label>
+                  <input name="planned_on" type="date" required min="${todayIso()}"
+                    class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-1">Time</label>
+                  <input name="planned_at" type="time" required value="18:00"
+                    class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40">
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">A little note <span class="text-roseink/40 font-normal">(optional)</span></label>
+                <textarea name="note" rows="4" maxlength="500" placeholder="Wear something cute. I will bring flowers. No phones at dinner..."
+                  class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40"></textarea>
+              </div>
+              <button class="w-full rounded-full bg-roseink text-blush py-3.5 font-medium hover:bg-rose-950 transition">Lock in this date</button>
+            </form>
+          </div>
+        </div>
+      `;
+    };
+
+    const renderShow = (id) => {
+      const plan = loadPlans().find((item) => item.id === id);
+      if (!plan) return `<p>This date is not on the calendar yet.</p>`;
+      return `
+        <div class="max-w-xl mx-auto text-center pt-6">
+          <p class="uppercase tracking-[0.3em] text-xs text-petal">it is a date</p>
+          <h1 class="font-display text-5xl mt-4">See you in Kolkata</h1>
+          <div class="glass rounded-3xl p-8 mt-8 text-left border border-white shadow-sm">
+            <p class="text-sm text-petal uppercase tracking-widest">${escapeHtml(plan.category_name)}</p>
+            <p class="font-display text-3xl mt-2">${escapeHtml(plan.place_name)}</p>
+            <p class="text-roseink/60 mt-1">${escapeHtml(plan.place_area)}, Kolkata</p>
+            <dl class="mt-6 space-y-3 text-sm">
+              <div class="flex justify-between gap-4 border-b border-rose-100 pb-3"><dt class="text-roseink/50">Day</dt><dd>${formatDayLong(plan.planned_on)}</dd></div>
+              <div class="flex justify-between gap-4 border-b border-rose-100 pb-3"><dt class="text-roseink/50">Time</dt><dd>${formatTime(plan.planned_at)}</dd></div>
+              ${plan.planner_name ? `<div class="flex justify-between gap-4 border-b border-rose-100 pb-3"><dt class="text-roseink/50">Chosen by</dt><dd>${escapeHtml(plan.planner_name)}</dd></div>` : ''}
+              ${plan.note ? `<div class="pt-1"><dt class="text-roseink/50 mb-1">Note</dt><dd class="leading-relaxed">${escapeHtml(plan.note)}</dd></div>` : ''}
+            </dl>
+          </div>
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="#/" class="rounded-full bg-roseink text-blush px-6 py-3 text-sm">Plan another</a>
+            <a href="#/our-dates" class="rounded-full border border-roseink/20 px-6 py-3 text-sm">All our dates</a>
+          </div>
+        </div>
+      `;
+    };
+
+    const renderIndex = () => {
+      const plans = loadPlans().slice().sort((a, b) => (a.planned_on + a.planned_at).localeCompare(b.planned_on + b.planned_at));
+      if (!plans.length) {
+        return `
+          <div class="mb-8">
+            <h1 class="font-display text-5xl">Our plans</h1>
+            <p class="mt-3 text-roseink/65">Every date she has locked in — day, time, and place in Kolkata.</p>
+          </div>
+          <div class="glass rounded-3xl p-10 text-center border border-white">
+            <p class="font-display text-3xl">Nothing on the calendar yet</p>
+            <p class="mt-2 text-roseink/60">Pick a category and choose where we should go.</p>
+            <a href="#/" class="inline-block mt-6 rounded-full bg-roseink text-blush px-6 py-3 text-sm">Start with a category</a>
+          </div>
+        `;
+      }
+      return `
+        <div class="mb-8">
+          <h1 class="font-display text-5xl">Our plans</h1>
+          <p class="mt-3 text-roseink/65">Every date she has locked in — day, time, and place in Kolkata.</p>
+        </div>
+        <div class="space-y-3">
+          ${plans.map((plan) => `
+            <a href="#/dates/${plan.id}" class="glass flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl p-5 border border-white hover:shadow-md transition">
+              <div>
+                <p class="text-xs uppercase tracking-widest text-petal">${escapeHtml(plan.category_name)}</p>
+                <p class="font-display text-2xl">${escapeHtml(plan.place_name)}</p>
+                <p class="text-sm text-roseink/60">${escapeHtml(plan.place_area)}, Kolkata</p>
+              </div>
+              <div class="text-sm sm:text-right">
+                <p>${formatDay(plan.planned_on)}</p>
+                <p class="text-roseink/55">${formatTime(plan.planned_at)}</p>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      `;
+    };
+
+    const bindCreate = (categorySlug, placeSlug) => {
+      const form = $('#date-form');
+      if (!form) return;
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const category = catalog.categories[categorySlug];
+        const place = category.places[placeSlug];
+        const data = new FormData(form);
+        const plannedOn = data.get('planned_on');
+        const plannedAt = String(data.get('planned_at') || '').slice(0, 5);
+        const error = $('#form-error');
+        if (!plannedOn || plannedOn < todayIso()) {
+          error.textContent = 'Pick today or a day still ahead.';
+          error.classList.remove('hidden');
+          return;
+        }
+        const plan = {
+          id: crypto.randomUUID(),
+          planner_name: String(data.get('planner_name') || '').trim(),
+          category_slug: categorySlug,
+          category_name: category.name,
+          place_slug: placeSlug,
+          place_name: place.name,
+          place_area: place.area,
+          planned_on: plannedOn,
+          planned_at: plannedAt,
+          note: String(data.get('note') || '').trim(),
+        };
+        savePlans([...loadPlans(), plan]);
+        location.hash = `#/dates/${plan.id}`;
+      });
+    };
+
+    const render = () => {
+      const parts = pathParts();
+      let html = renderHome();
+      if (parts[0] === 'our-dates') html = renderIndex();
+      else if (parts[0] === 'dates' && parts[1]) html = renderShow(parts[1]);
+      else if (parts[0] === 'plan' && parts[1] && parts[2]) html = renderCreate(parts[1], parts[2]);
+      else if (parts[0] === 'plan' && parts[1]) html = renderCategory(parts[1]);
+      $('#app').innerHTML = html;
+      if (parts[0] === 'plan' && parts[1] && parts[2]) bindCreate(parts[1], parts[2]);
+      window.scrollTo(0, 0);
+    };
+
+    fetch('./dates.json')
+      .then((res) => res.json())
+      .then((data) => {
+        catalog = data;
+        if (!location.hash) location.hash = '#/';
+        render();
+        window.addEventListener('hashchange', render);
+      })
+      .catch(() => {
+        $('#app').innerHTML = '<p>Could not load Kolkata places. Try refreshing.</p>';
+      });
+  </script>
+</body>
+</html>
