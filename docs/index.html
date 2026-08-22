@@ -6,276 +6,575 @@
   <title>Our Kolkata Date</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Cormorant Garamond', 'serif'],
-            sans: ['Outfit', 'system-ui', 'sans-serif'],
-          },
-          colors: {
-            roseink: '#4a1c2a',
-            blush: '#f8e7ea',
-            petal: '#d4788b',
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background:
-        radial-gradient(1200px 600px at 10% -10%, rgba(212, 120, 139, 0.18), transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, rgba(124, 58, 237, 0.10), transparent 50%),
-        #fff7f5;
+    :root {
+      --bg: #12090c;
+      --bg-soft: #1c1014;
+      --ink: #f6eee4;
+      --muted: rgba(246, 238, 228, 0.68);
+      --gold: #e2c48a;
+      --gold-2: #b8894a;
+      --wine: #9a3040;
+      --line: rgba(226, 196, 138, 0.22);
+      --shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
     }
-    .glass {
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(12px);
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Manrope, system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea {
+      font: inherit;
+      color: inherit;
+    }
+    .serif { font-family: "Cormorant Garamond", serif; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 0;
+      background: linear-gradient(to bottom, rgba(18,9,12,.92), rgba(18,9,12,.64) 70%, transparent);
+      backdrop-filter: blur(10px);
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand strong {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: 0.01em;
+    }
+    .brand span, .kicker {
+      color: var(--gold);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-size: 10px;
+    }
+    .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+    .nav-links a:hover { color: var(--gold); }
+    .hero {
+      position: relative;
+      min-height: 78vh;
+      margin: 8px 0 42px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .hero img {
+      width: 100%;
+      height: 78vh;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(12,6,8,.78) 0%, rgba(12,6,8,.28) 52%, rgba(12,6,8,.18) 100%),
+        linear-gradient(to top, rgba(12,6,8,.55), transparent 42%);
+    }
+    .hero-copy {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 48px 44px 42px;
+      max-width: 720px;
+    }
+    .hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(48px, 8vw, 92px);
+      line-height: 0.92;
+      margin: 10px 0 16px;
+      font-weight: 600;
+    }
+    .hero p { margin: 0; font-size: 18px; color: var(--muted); max-width: 46ch; }
+    .steps {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin: 22px 0 0;
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .tile {
+      position: relative;
+      min-height: 280px;
+      border-radius: 22px;
+      overflow: hidden;
+      isolation: isolate;
+      box-shadow: 0 16px 40px rgba(0,0,0,.28);
+      transform: translateY(0);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .tile:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .tile.wide { grid-column: span 2; min-height: 340px; }
+    .tile img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .tile-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,6,8,.88), rgba(12,6,8,.15) 55%);
+    }
+    .tile-copy {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 22px;
+    }
+    .tile h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 34px;
+      margin: 6px 0 8px;
+      font-weight: 600;
+    }
+    .tile p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
+    .count {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .section-head { margin: 8px 0 22px; }
+    .section-head h1, .section-head h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(36px, 6vw, 60px);
+      margin: 8px 0;
+      font-weight: 600;
+    }
+    .section-head p { color: var(--muted); max-width: 54ch; }
+    .back { color: var(--gold); font-size: 13px; }
+    .place-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .place-card {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      gap: 0;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      min-height: 168px;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+    .place-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .place-card img { width: 168px; height: 100%; object-fit: cover; }
+    .place-card div { padding: 20px 20px 18px; }
+    .place-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      margin: 0 0 4px;
+    }
+    .area { color: var(--gold); font-size: 13px; margin-bottom: 8px; }
+    .place-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
+    .cta { display: inline-block; margin-top: 14px; color: var(--ink); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    .book {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 24px;
+      align-items: stretch;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .book-photo { min-height: 520px; position: relative; }
+    .book-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .book-form { padding: 36px 32px; }
+    label { display: block; font-size: 13px; margin: 0 0 8px; color: var(--muted); }
+    input, textarea {
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+      outline: none;
+      margin-bottom: 16px;
+    }
+    input:focus, textarea:focus { border-color: var(--gold); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn {
+      width: 100%;
+      border: 0;
+      background: linear-gradient(90deg, var(--gold), var(--gold-2));
+      color: #2a160c;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 14px 18px;
+      cursor: pointer;
+    }
+    .error {
+      display: none;
+      background: rgba(154, 48, 64, .25);
+      border: 1px solid rgba(154, 48, 64, .5);
+      color: #ffd9de;
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+    .ticket {
+      width: min(560px, 100%);
+      margin: 24px auto 0;
+      background: #f6eee4;
+      color: #2a160c;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .ticket-top {
+      padding: 28px 28px 18px;
+      background:
+        linear-gradient(180deg, rgba(42,22,12,.08), transparent),
+        #f6eee4;
+    }
+    .ticket-top .kicker { color: var(--wine); }
+    .ticket h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 42px;
+      margin: 6px 0 4px;
+    }
+    .ticket-meta { padding: 0 28px 28px; }
+    .ticket-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px dashed rgba(42,22,12,.18);
+      font-size: 15px;
+    }
+    .ticket-row span { color: #7a5a48; }
+    .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 12px 18px;
+      color: var(--ink);
+    }
+    .plan-list { display: grid; gap: 12px; }
+    .plan-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--bg-soft);
+    }
+    .empty {
+      text-align: center;
+      padding: 64px 20px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--bg-soft);
+    }
+    footer {
+      padding: 48px 0 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .latest { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+    .latest a {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: var(--bg-soft);
+    }
+    @media (max-width: 960px) {
+      .grid, .place-grid, .book, .latest, .row { grid-template-columns: 1fr; }
+      .tile.wide { grid-column: auto; min-height: 280px; }
+      .place-card { grid-template-columns: 1fr; }
+      .place-card img { width: 100%; height: 180px; }
+      .book-photo { min-height: 240px; }
+      .hero-copy { padding: 28px 22px; }
     }
   </style>
 </head>
-<body class="min-h-screen text-roseink font-sans antialiased">
-  <header class="max-w-6xl mx-auto px-5 py-6 flex items-center justify-between">
-    <a href="#/" class="flex items-baseline gap-2">
-      <span class="text-2xl font-display italic">Our Kolkata Date</span>
-      <span class="hidden sm:inline text-xs tracking-[0.2em] uppercase text-petal">pick a day · a time · a place</span>
-    </a>
-    <nav class="flex items-center gap-5 text-sm">
-      <a href="#/" class="hover:text-petal transition">Categories</a>
-      <a href="#/our-dates" class="hover:text-petal transition">Our plans</a>
-    </nav>
-  </header>
-  <main id="app" class="max-w-6xl mx-auto px-5 pb-16"></main>
-  <footer class="max-w-6xl mx-auto px-5 pb-10 text-center text-sm text-roseink/50">
-    Made for wandering Kolkata together.
-  </footer>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <a class="brand" href="#/">
+        <strong>Our Kolkata Date</strong>
+        <span>day · time · place</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#/">Categories</a>
+        <a href="#/our-dates">Our plans</a>
+      </nav>
+    </header>
+    <main id="app"></main>
+    <footer>A little map of Kolkata, made for two.</footer>
+  </div>
   <script>window.DATE_CATALOG = {"couple_title":"Our Kolkata Date","tagline":"Pick the day, the time, and where we should go. I will be there.","categories":{"movie":{"name":"Movie Date","emoji":"🎬","blurb":"Lights down, popcorn up, and a film we can talk about on the way home.","accent":"#7c3aed","places":{"inox-south-city":{"name":"INOX South City Mall","area":"Prince Anwar Shah Road","note":"Big screens, easy food nearby, and a mall stroll after."},"pvr-quest":{"name":"PVR Quest Mall","area":"Park Circus","note":"Central, pretty, and perfect for a Park Circus evening."},"inox-city-centre":{"name":"INOX City Centre 1","area":"Salt Lake","note":"Comfortable seating and lots of post-movie dinner options."},"nandan":{"name":"Nandan","area":"AJC Bose Road","note":"For a quieter, more cinematic Kolkata kind of date."},"star-theatre":{"name":"Star Theatre","area":"Hatibagan","note":"Old-world theatre energy in North Kolkata."}}},"cafe":{"name":"Cafe Date","emoji":"☕","blurb":"Slow coffee, shared dessert, and nowhere we have to rush.","accent":"#c2410c","places":{"flurys":{"name":"Flurys","area":"Park Street","note":"Classic rum balls, breakfast, and Park Street people-watching."},"indian-coffee-house":{"name":"Indian Coffee House","area":"College Street","note":"Adda, history, and filter coffee in a room that never sleeps."},"sienna":{"name":"Sienna Store & Cafe","area":"Hindustan Park","note":"Pretty plates, plants, and a South Kolkata favourite."},"mrs-magpie":{"name":"Mrs Magpie","area":"Hindustan Park","note":"Pastries, tea, and a soft afternoon."},"dollys-tea":{"name":"Dolly's Tea Shop","area":"Dakshinapan","note":"Legendary teas and a uniquely Kolkata pause."},"oxford-cha-bar":{"name":"Cha Bar at Oxford Bookstore","area":"Park Street","note":"Books upstairs, tea downstairs, conversation in between."}}},"dinner":{"name":"Dinner Date","emoji":"🍽️","blurb":"A proper night out: good food, a little dress-up, and Kolkata on the plate.","accent":"#be123c","places":{"peter-cat":{"name":"Peter Cat","area":"Park Street","note":"Chelo kebab, dim lights, and a Park Street classic."},"mocambo":{"name":"Mocambo","area":"Park Street","note":"Old-school continental and that late-night Kolkata glow."},"oh-calcutta":{"name":"Oh! Calcutta","area":"Elgin Road / Forum","note":"Bengali favourites, dressed up for a date night."},"6-ballygunge":{"name":"6 Ballygunge Place","area":"Ballygunge","note":"Home-style Bengali thalis in a heritage bungalow mood."},"bohemian":{"name":"Bohemian","area":"Hindustan Park","note":"Inventive Bengali plates if you want something special."},"arsalan":{"name":"Arsalan","area":"Park Circus","note":"Biryani, rumali roti, and zero pretence."},"kewpies":{"name":"Kewpie's","area":"Elgin Road","note":"Family-run Bengali cooking that always feels like a treat."}}},"travel":{"name":"Traveling Date","emoji":"🚂","blurb":"A little escape: river, temple towns, day trips, or just wandering the city.","accent":"#0f766e","places":{"victoria-maidan":{"name":"Victoria Memorial & Maidan","area":"Queen’s Way","note":"Marble, gardens, and a long walk under the Kolkata sky."},"prinsep-howrah":{"name":"Prinsep Ghat & Howrah Bridge","area":"Strand Road","note":"Sunset on the Hooghly and the city’s most famous skyline."},"eco-park":{"name":"Eco Park","area":"New Town","note":"Boats, gardens, and a full afternoon away from traffic."},"dakshineswar-belur":{"name":"Dakshineswar & Belur Math","area":"North / Howrah","note":"Temples, the river, and a ferry between two banks."},"diamond-harbour":{"name":"Diamond Harbour","area":"South 24 Parganas","note":"A short train ride and the river opening toward the sea."},"shantiniketan":{"name":"Shantiniketan day trip","area":"Birbhum (from Howrah / Bolpur)","note":"Tagore country: red earth, crafts, and a slower day."},"sundarbans":{"name":"Sundarbans (Godkhali start)","area":"South 24 Parganas","note":"Mangroves, boats, and a proper adventure if you want a big one."}}},"park":{"name":"Park Date","emoji":"🌳","blurb":"Grass, shade, ice cream, and time that does not need a reservation.","accent":"#15803d","places":{"elliot-park":{"name":"Elliot Park","area":"Middleton Street","note":"A green pocket right in the middle of the city."},"rabindra-sarobar":{"name":"Rabindra Sarobar","area":"South Kolkata","note":"Lakeside walking and an easy, unhurried evening."},"central-park-salt-lake":{"name":"Central Park","area":"Salt Lake","note":"Wide paths, trees, and space to breathe."},"agri-horticultural":{"name":"Agri Horticultural Society Garden","area":"Alipore","note":"Quiet lawns and flowers when you want something pretty."}}},"riverside":{"name":"Riverside Date","emoji":"🌅","blurb":"The Hooghly at golden hour. That is the whole plan.","accent":"#0369a1","places":{"prinsep-ghat":{"name":"Prinsep Ghat","area":"Strand Road","note":"The postcard sunset: pillars, river, and street musicians."},"millennium-park":{"name":"Millennium Park","area":"Strand Road","note":"Breeze, benches, and a river cruise if you feel like it."},"outram-ghat":{"name":"Outram Ghat","area":"Near Howrah Bridge","note":"Closer to the bridge lights and the evening crowd."},"vidyasagar-setu-view":{"name":"Vidyasagar Setu view","area":"Hooghly waterfront","note":"Second Hooghly Bridge glittering after dark."}}},"dessert":{"name":"Dessert Date","emoji":"🍰","blurb":"Skip dinner. Go straight to mishti, pastry, and something cold.","accent":"#db2777","places":{"nahoums":{"name":"Nahoum's","area":"New Market","note":"Jewish bakery classics in the heart of New Market."},"kc-das":{"name":"K.C. Das","area":"Esplanade","note":"The rosogolla house. Non-negotiable Kolkata."},"bhim-chandra-nag":{"name":"Bhim Chandra Nag","area":"Bowbazar","note":"Old-school mishti from a legendary kitchen."},"paramount":{"name":"Paramount Sherbet","area":"College Street","note":"Daab sherbet and a century of College Street summers."},"flurys-dessert":{"name":"Flurys (dessert stop)","area":"Park Street","note":"Pastry window, rum balls, and a sweet Park Street pause."}}},"culture":{"name":"Culture Date","emoji":"🏛️","blurb":"Museums, heritage houses, and the Kolkata that lives in stories.","accent":"#b45309","places":{"indian-museum":{"name":"Indian Museum","area":"Chowringhee","note":"The oldest museum in India — plenty to wander through."},"victoria-memorial":{"name":"Victoria Memorial","area":"Maidan","note":"Galleries inside, gardens outside, photographs everywhere."},"jorasanko":{"name":"Jorasanko Thakurbari","area":"North Kolkata","note":"Tagore’s family home and a slower, storied afternoon."},"kumartuli":{"name":"Kumartuli","area":"North Kolkata","note":"Idol-makers’ lanes — especially magical before Puja."},"marble-palace":{"name":"Marble Palace","area":"Muktaram Babu Street","note":"A slightly secret, slightly grand North Kolkata mansion."}}}}};</script>
   <script>
     const STORAGE_KEY = 'kolkata-date-plans';
+    const MEDIA = {
+      hero: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1800&q=80',
+      movie: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1400&q=80',
+      cafe: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1400&q=80',
+      dinner: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80',
+      travel: 'https://images.unsplash.com/photo-1536421469767-80559bb6f5e1?auto=format&fit=crop&w=1400&q=80',
+      park: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=80',
+      riverside: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80',
+      dessert: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1400&q=80',
+      culture: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74250?auto=format&fit=crop&w=1400&q=80'
+    };
+    const PLACE_MEDIA = {
+      'inox-south-city': MEDIA.movie,
+      'pvr-quest': 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1200&q=80',
+      'inox-city-centre': MEDIA.movie,
+      'nandan': 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1200&q=80',
+      'star-theatre': 'https://images.unsplash.com/photo-1503095396549-47719fa42660?auto=format&fit=crop&w=1200&q=80',
+      'flurys': 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80',
+      'indian-coffee-house': 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80',
+      'sienna': MEDIA.cafe,
+      'mrs-magpie': 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1200&q=80',
+      'dollys-tea': 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1200&q=80',
+      'oxford-cha-bar': 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1200&q=80',
+      'peter-cat': MEDIA.dinner,
+      'mocambo': 'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80',
+      'oh-calcutta': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
+      '6-ballygunge': 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=1200&q=80',
+      'bohemian': MEDIA.dinner,
+      'arsalan': 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=1200&q=80',
+      'kewpies': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
+      'victoria-maidan': MEDIA.culture,
+      'prinsep-howrah': MEDIA.hero,
+      'eco-park': MEDIA.park,
+      'dakshineswar-belur': 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80',
+      'diamond-harbour': MEDIA.riverside,
+      'shantiniketan': 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+      'sundarbans': 'https://images.unsplash.com/photo-1502082553048-f009c37129c9?auto=format&fit=crop&w=1200&q=80',
+      'elliot-park': MEDIA.park,
+      'rabindra-sarobar': 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?auto=format&fit=crop&w=1200&q=80',
+      'central-park-salt-lake': MEDIA.park,
+      'agri-horticultural': 'https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?auto=format&fit=crop&w=1200&q=80',
+      'prinsep-ghat': MEDIA.hero,
+      'millennium-park': MEDIA.riverside,
+      'outram-ghat': MEDIA.hero,
+      'vidyasagar-setu-view': MEDIA.hero,
+      'nahoums': MEDIA.dessert,
+      'kc-das': 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1200&q=80',
+      'bhim-chandra-nag': MEDIA.dessert,
+      'paramount': 'https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=1200&q=80',
+      'flurys-dessert': MEDIA.dessert,
+      'indian-museum': MEDIA.culture,
+      'victoria-memorial': MEDIA.culture,
+      'jorasanko': MEDIA.culture,
+      'kumartuli': 'https://images.unsplash.com/photo-1604872441539-ef1db9b5bb1e?auto=format&fit=crop&w=1200&q=80',
+      'marble-palace': MEDIA.culture
+    };
+
     let catalog = null;
-
-    const $ = (sel, root = document) => root.querySelector(sel);
+    const $ = (sel) => document.querySelector(sel);
     const escapeHtml = (value) => String(value ?? '')
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;');
-
-    const loadPlans = () => {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      } catch {
-        return [];
-      }
-    };
-
+      .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+    const loadPlans = () => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; } };
     const savePlans = (plans) => localStorage.setItem(STORAGE_KEY, JSON.stringify(plans));
-
-    const formatDay = (iso) => {
-      const date = new Date(iso + 'T12:00:00');
-      return date.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-    };
-
-    const formatDayLong = (iso) => {
-      const date = new Date(iso + 'T12:00:00');
-      return date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-    };
-
-    const formatTime = (hhmm) => {
-      const [h, m] = hhmm.split(':').map(Number);
-      const date = new Date();
-      date.setHours(h, m);
-      return date.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
-    };
-
     const todayIso = () => {
       const now = new Date();
-      const offset = now.getTimezoneOffset();
-      const local = new Date(now.getTime() - offset * 60000);
-      return local.toISOString().slice(0, 10);
+      return new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
     };
-
+    const formatDay = (iso, long = false) => new Date(iso + 'T12:00:00').toLocaleDateString('en-IN', {
+      weekday: long ? 'long' : 'short', day: 'numeric', month: long ? 'long' : 'short', year: 'numeric'
+    });
+    const formatTime = (hhmm) => {
+      const [h, m] = String(hhmm).split(':').map(Number);
+      const d = new Date(); d.setHours(h, m);
+      return d.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
+    };
     const pathParts = () => location.hash.replace(/^#/, '').split('/').filter(Boolean);
+    const imgFor = (category, place) => PLACE_MEDIA[place] || MEDIA[category] || MEDIA.hero;
 
     const renderHome = () => {
       const plans = loadPlans().slice().reverse().slice(0, 3);
-      const cards = Object.entries(catalog.categories).map(([slug, category]) => `
-        <a href="#/plan/${slug}" class="glass group rounded-3xl p-6 border border-white/80 shadow-sm hover:-translate-y-1 hover:shadow-lg transition">
-          <div class="text-3xl mb-4">${category.emoji}</div>
-          <h2 class="font-display text-2xl">${escapeHtml(category.name)}</h2>
-          <p class="mt-2 text-sm text-roseink/65 leading-relaxed">${escapeHtml(category.blurb)}</p>
-          <p class="mt-4 text-xs uppercase tracking-widest text-petal group-hover:underline">${Object.keys(category.places).length} places</p>
-        </a>
-      `).join('');
-
+      const slugs = Object.keys(catalog.categories);
+      const tiles = slugs.map((slug, i) => {
+        const category = catalog.categories[slug];
+        const wide = i === 0 || i === 3 ? ' wide' : '';
+        return `
+          <a class="tile${wide}" href="#/plan/${slug}">
+            <img src="${MEDIA[slug]}" alt="${escapeHtml(category.name)}">
+            <div class="tile-shade"></div>
+            <div class="tile-copy">
+              <div class="count">${Object.keys(category.places).length} places in Kolkata</div>
+              <h2>${escapeHtml(category.name)}</h2>
+              <p>${escapeHtml(category.blurb)}</p>
+            </div>
+          </a>`;
+      }).join('');
       const latest = plans.length ? `
-        <section class="mt-14">
-          <div class="flex items-end justify-between mb-5">
-            <h2 class="font-display text-3xl">Latest plans</h2>
-            <a href="#/our-dates" class="text-sm text-petal hover:underline">See all</a>
-          </div>
-          <div class="grid md:grid-cols-3 gap-4">
-            ${plans.map((plan) => `
-              <a href="#/dates/${plan.id}" class="rounded-2xl bg-white/80 border border-rose-100 p-5 hover:border-petal/40 transition">
-                <p class="text-xs uppercase tracking-widest text-petal">${escapeHtml(plan.category_name)}</p>
-                <p class="font-display text-xl mt-1">${escapeHtml(plan.place_name)}</p>
-                <p class="text-sm text-roseink/60 mt-2">${formatDay(plan.planned_on)} · ${formatTime(plan.planned_at)}</p>
-              </a>
-            `).join('')}
-          </div>
-        </section>
-      ` : '';
-
+        <div class="section-head" style="margin-top:48px">
+          <div class="kicker">already chosen</div>
+          <h2>Latest plans</h2>
+        </div>
+        <div class="latest">
+          ${plans.map((plan) => `
+            <a href="#/dates/${plan.id}">
+              <div class="count">${escapeHtml(plan.category_name)}</div>
+              <h3 class="serif" style="font-size:28px;margin:8px 0 6px">${escapeHtml(plan.place_name)}</h3>
+              <p style="color:var(--muted);margin:0">${formatDay(plan.planned_on)} · ${formatTime(plan.planned_at)}</p>
+            </a>`).join('')}
+        </div>` : '';
       return `
-        <section class="text-center pt-6 pb-12">
-          <p class="uppercase tracking-[0.35em] text-xs text-petal mb-4">Kolkata · just us</p>
-          <h1 class="font-display text-5xl sm:text-7xl leading-tight">${escapeHtml(catalog.couple_title)}</h1>
-          <p class="mt-5 max-w-xl mx-auto text-lg text-roseink/70">${escapeHtml(catalog.tagline)}</p>
-          <p class="mt-3 text-sm text-roseink/50">Choose a kind of date. Then pick a place, a day, and a time.</p>
+        <section class="hero">
+          <img src="${MEDIA.hero}" alt="Howrah Bridge at night">
+          <div class="hero-shade"></div>
+          <div class="hero-copy">
+            <div class="kicker">Kolkata · just us</div>
+            <h1>Choose the night.<br>I’ll be there.</h1>
+            <p>${escapeHtml(catalog.tagline)}</p>
+            <div class="steps"><span>01 Category</span><span>02 Place</span><span>03 Day & time</span></div>
+          </div>
         </section>
-        <section class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">${cards}</section>
-        ${latest}
-      `;
+        <div class="section-head">
+          <div class="kicker">start here</div>
+          <h2>What kind of date?</h2>
+          <p>Movie, cafe, dinner, a little travel — pick a mood, then a Kolkata place, then the day and time.</p>
+        </div>
+        <section class="grid">${tiles}</section>
+        ${latest}`;
     };
 
     const renderCategory = (slug) => {
       const category = catalog.categories[slug];
-      if (!category) return `<p>That category is not on the list.</p>`;
+      if (!category) return '<p>That category is not on the list.</p>';
       const places = Object.entries(category.places).map(([placeSlug, place]) => `
-        <a href="#/plan/${slug}/${placeSlug}" class="glass rounded-3xl p-6 border border-white shadow-sm hover:-translate-y-0.5 hover:shadow-md transition">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h2 class="font-display text-2xl">${escapeHtml(place.name)}</h2>
-              <p class="text-sm text-petal mt-1">${escapeHtml(place.area)}</p>
-            </div>
-            <span class="text-xs uppercase tracking-widest text-roseink/40">Kolkata</span>
+        <a class="place-card" href="#/plan/${slug}/${placeSlug}">
+          <img src="${imgFor(slug, placeSlug)}" alt="${escapeHtml(place.name)}">
+          <div>
+            <h3>${escapeHtml(place.name)}</h3>
+            <div class="area">${escapeHtml(place.area)}, Kolkata</div>
+            <p>${escapeHtml(place.note)}</p>
+            <span class="cta">Choose day & time →</span>
           </div>
-          <p class="mt-3 text-sm text-roseink/70 leading-relaxed">${escapeHtml(place.note)}</p>
-          <p class="mt-4 text-sm font-medium text-roseink">Choose day & time →</p>
-        </a>
-      `).join('');
-
+        </a>`).join('');
       return `
-        <div class="mb-8">
-          <a href="#/" class="text-sm text-petal hover:underline">← All categories</a>
-          <p class="mt-6 text-4xl">${category.emoji}</p>
-          <h1 class="font-display text-5xl mt-2">${escapeHtml(category.name)}</h1>
-          <p class="mt-3 max-w-2xl text-roseink/70">${escapeHtml(category.blurb)}</p>
-          <p class="mt-2 text-sm text-roseink/50">Tap a place in Kolkata, then choose the day and time.</p>
+        <p><a class="back" href="#/">← All categories</a></p>
+        <div class="section-head">
+          <div class="kicker">${escapeHtml(category.emoji)} ${escapeHtml(category.name)}</div>
+          <h1>${escapeHtml(category.name)}</h1>
+          <p>${escapeHtml(category.blurb)}</p>
         </div>
-        <div class="grid md:grid-cols-2 gap-4">${places}</div>
-      `;
+        <div class="place-grid">${places}</div>`;
     };
 
     const renderCreate = (categorySlug, placeSlug) => {
       const category = catalog.categories[categorySlug];
       const place = category?.places?.[placeSlug];
-      if (!place) return `<p>That place is not on the list.</p>`;
+      if (!place) return '<p>That place is not on the list.</p>';
       return `
-        <div class="max-w-2xl mx-auto">
-          <a href="#/plan/${categorySlug}" class="text-sm text-petal hover:underline">← Other ${escapeHtml(category.name.toLowerCase())}s</a>
-          <div class="glass rounded-3xl p-8 mt-6 border border-white shadow-sm">
-            <p class="text-xs uppercase tracking-[0.25em] text-petal">${category.emoji} ${escapeHtml(category.name)}</p>
-            <h1 class="font-display text-4xl mt-3">${escapeHtml(place.name)}</h1>
-            <p class="text-petal mt-1">${escapeHtml(place.area)}, Kolkata</p>
-            <p class="mt-3 text-roseink/70">${escapeHtml(place.note)}</p>
-            <form id="date-form" class="mt-8 space-y-5">
-              <p id="form-error" class="hidden rounded-2xl bg-rose-100 text-rose-800 px-4 py-3 text-sm"></p>
-              <div>
-                <label class="block text-sm font-medium mb-1">Your name <span class="text-roseink/40 font-normal">(optional)</span></label>
-                <input name="planner_name" type="text" maxlength="80" placeholder="So I know who locked this in"
-                  class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40">
-              </div>
-              <div class="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-medium mb-1">Day</label>
-                  <input name="planned_on" type="date" required min="${todayIso()}"
-                    class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium mb-1">Time</label>
-                  <input name="planned_at" type="time" required value="18:00"
-                    class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40">
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-medium mb-1">A little note <span class="text-roseink/40 font-normal">(optional)</span></label>
-                <textarea name="note" rows="4" maxlength="500" placeholder="Wear something cute. I will bring flowers. No phones at dinner..."
-                  class="w-full rounded-2xl border border-rose-100 bg-white px-4 py-3 outline-none focus:ring-2 focus:ring-petal/40"></textarea>
-              </div>
-              <button class="w-full rounded-full bg-roseink text-blush py-3.5 font-medium hover:bg-rose-950 transition">Lock in this date</button>
-            </form>
+        <p><a class="back" href="#/plan/${categorySlug}">← Other ${escapeHtml(category.name.toLowerCase())}s</a></p>
+        <div class="book">
+          <div class="book-photo">
+            <img src="${imgFor(categorySlug, placeSlug)}" alt="${escapeHtml(place.name)}">
           </div>
-        </div>
-      `;
+          <form class="book-form" id="date-form">
+            <div class="kicker">${escapeHtml(category.name)}</div>
+            <h1 class="serif" style="font-size:48px;margin:8px 0 6px">${escapeHtml(place.name)}</h1>
+            <p class="area">${escapeHtml(place.area)}, Kolkata</p>
+            <p style="color:var(--muted);margin:0 0 22px">${escapeHtml(place.note)}</p>
+            <div class="error" id="form-error"></div>
+            <label>Your name <span style="opacity:.6">(optional)</span></label>
+            <input name="planner_name" maxlength="80" placeholder="So I know who locked this in">
+            <div class="row">
+              <div>
+                <label>Day</label>
+                <input name="planned_on" type="date" required min="${todayIso()}">
+              </div>
+              <div>
+                <label>Time</label>
+                <input name="planned_at" type="time" required value="18:00">
+              </div>
+            </div>
+            <label>A little note <span style="opacity:.6">(optional)</span></label>
+            <textarea name="note" rows="4" maxlength="500" placeholder="Wear something cute. I will bring flowers."></textarea>
+            <button class="btn" type="submit">Lock in this date</button>
+          </form>
+        </div>`;
     };
 
     const renderShow = (id) => {
       const plan = loadPlans().find((item) => item.id === id);
-      if (!plan) return `<p>This date is not on the calendar yet.</p>`;
+      if (!plan) return '<p>This date is not on the calendar yet.</p>';
       return `
-        <div class="max-w-xl mx-auto text-center pt-6">
-          <p class="uppercase tracking-[0.3em] text-xs text-petal">it is a date</p>
-          <h1 class="font-display text-5xl mt-4">See you in Kolkata</h1>
-          <div class="glass rounded-3xl p-8 mt-8 text-left border border-white shadow-sm">
-            <p class="text-sm text-petal uppercase tracking-widest">${escapeHtml(plan.category_name)}</p>
-            <p class="font-display text-3xl mt-2">${escapeHtml(plan.place_name)}</p>
-            <p class="text-roseink/60 mt-1">${escapeHtml(plan.place_area)}, Kolkata</p>
-            <dl class="mt-6 space-y-3 text-sm">
-              <div class="flex justify-between gap-4 border-b border-rose-100 pb-3"><dt class="text-roseink/50">Day</dt><dd>${formatDayLong(plan.planned_on)}</dd></div>
-              <div class="flex justify-between gap-4 border-b border-rose-100 pb-3"><dt class="text-roseink/50">Time</dt><dd>${formatTime(plan.planned_at)}</dd></div>
-              ${plan.planner_name ? `<div class="flex justify-between gap-4 border-b border-rose-100 pb-3"><dt class="text-roseink/50">Chosen by</dt><dd>${escapeHtml(plan.planner_name)}</dd></div>` : ''}
-              ${plan.note ? `<div class="pt-1"><dt class="text-roseink/50 mb-1">Note</dt><dd class="leading-relaxed">${escapeHtml(plan.note)}</dd></div>` : ''}
-            </dl>
+        <div style="text-align:center" class="kicker">it is a date</div>
+        <h1 class="serif" style="text-align:center;font-size:clamp(40px,7vw,70px);margin:8px 0 0">See you in Kolkata</h1>
+        <article class="ticket">
+          <div class="ticket-top">
+            <div class="kicker">${escapeHtml(plan.category_name)}</div>
+            <h1>${escapeHtml(plan.place_name)}</h1>
+            <p style="margin:0;color:#7a5a48">${escapeHtml(plan.place_area)}, Kolkata</p>
           </div>
-          <div class="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#/" class="rounded-full bg-roseink text-blush px-6 py-3 text-sm">Plan another</a>
-            <a href="#/our-dates" class="rounded-full border border-roseink/20 px-6 py-3 text-sm">All our dates</a>
+          <div class="ticket-meta">
+            <div class="ticket-row"><span>Day</span><strong>${formatDay(plan.planned_on, true)}</strong></div>
+            <div class="ticket-row"><span>Time</span><strong>${formatTime(plan.planned_at)}</strong></div>
+            ${plan.planner_name ? `<div class="ticket-row"><span>Chosen by</span><strong>${escapeHtml(plan.planner_name)}</strong></div>` : ''}
+            ${plan.note ? `<div class="ticket-row"><span>Note</span><strong>${escapeHtml(plan.note)}</strong></div>` : ''}
           </div>
-        </div>
-      `;
+        </article>
+        <div class="actions">
+          <a class="btn" style="width:auto;padding:12px 22px" href="#/">Plan another</a>
+          <a class="ghost" href="#/our-dates">All our dates</a>
+        </div>`;
     };
 
     const renderIndex = () => {
       const plans = loadPlans().slice().sort((a, b) => (a.planned_on + a.planned_at).localeCompare(b.planned_on + b.planned_at));
       if (!plans.length) {
         return `
-          <div class="mb-8">
-            <h1 class="font-display text-5xl">Our plans</h1>
-            <p class="mt-3 text-roseink/65">Every date she has locked in — day, time, and place in Kolkata.</p>
-          </div>
-          <div class="glass rounded-3xl p-10 text-center border border-white">
-            <p class="font-display text-3xl">Nothing on the calendar yet</p>
-            <p class="mt-2 text-roseink/60">Pick a category and choose where we should go.</p>
-            <a href="#/" class="inline-block mt-6 rounded-full bg-roseink text-blush px-6 py-3 text-sm">Start with a category</a>
-          </div>
-        `;
+          <div class="empty">
+            <div class="kicker">calendar</div>
+            <h1 class="serif" style="font-size:48px;margin:8px 0">Nothing on the calendar yet</h1>
+            <p style="color:var(--muted)">Pick a mood, a Kolkata place, then a day and time.</p>
+            <a class="btn" style="width:auto;display:inline-block;margin-top:8px;padding:12px 22px" href="#/">Start with a category</a>
+          </div>`;
       }
       return `
-        <div class="mb-8">
-          <h1 class="font-display text-5xl">Our plans</h1>
-          <p class="mt-3 text-roseink/65">Every date she has locked in — day, time, and place in Kolkata.</p>
+        <div class="section-head">
+          <div class="kicker">calendar</div>
+          <h1>Our plans</h1>
+          <p>Every date locked in — the day, the time, and the place in Kolkata.</p>
         </div>
-        <div class="space-y-3">
+        <div class="plan-list">
           ${plans.map((plan) => `
-            <a href="#/dates/${plan.id}" class="glass flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl p-5 border border-white hover:shadow-md transition">
+            <a class="plan-row" href="#/dates/${plan.id}">
               <div>
-                <p class="text-xs uppercase tracking-widest text-petal">${escapeHtml(plan.category_name)}</p>
-                <p class="font-display text-2xl">${escapeHtml(plan.place_name)}</p>
-                <p class="text-sm text-roseink/60">${escapeHtml(plan.place_area)}, Kolkata</p>
+                <div class="count">${escapeHtml(plan.category_name)}</div>
+                <h3 class="serif" style="font-size:30px;margin:4px 0">${escapeHtml(plan.place_name)}</h3>
+                <div class="area">${escapeHtml(plan.place_area)}, Kolkata</div>
               </div>
-              <div class="text-sm sm:text-right">
-                <p>${formatDay(plan.planned_on)}</p>
-                <p class="text-roseink/55">${formatTime(plan.planned_at)}</p>
+              <div style="text-align:right;color:var(--muted)">
+                <div>${formatDay(plan.planned_on)}</div>
+                <div>${formatTime(plan.planned_at)}</div>
               </div>
-            </a>
-          `).join('')}
-        </div>
-      `;
+            </a>`).join('')}
+        </div>`;
     };
 
     const bindCreate = (categorySlug, placeSlug) => {
@@ -287,11 +586,10 @@
         const place = category.places[placeSlug];
         const data = new FormData(form);
         const plannedOn = data.get('planned_on');
-        const plannedAt = String(data.get('planned_at') || '').slice(0, 5);
         const error = $('#form-error');
         if (!plannedOn || plannedOn < todayIso()) {
+          error.style.display = 'block';
           error.textContent = 'Pick today or a day still ahead.';
-          error.classList.remove('hidden');
           return;
         }
         const plan = {
@@ -303,8 +601,8 @@
           place_name: place.name,
           place_area: place.area,
           planned_on: plannedOn,
-          planned_at: plannedAt,
-          note: String(data.get('note') || '').trim(),
+          planned_at: String(data.get('planned_at') || '').slice(0, 5),
+          note: String(data.get('note') || '').trim()
         };
         savePlans([...loadPlans(), plan]);
         location.hash = `#/dates/${plan.id}`;
@@ -320,7 +618,7 @@
       else if (parts[0] === 'plan' && parts[1]) html = renderCategory(parts[1]);
       $('#app').innerHTML = html;
       if (parts[0] === 'plan' && parts[1] && parts[2]) bindCreate(parts[1], parts[2]);
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'instant' });
     };
 
     const boot = (data) => {
@@ -329,16 +627,7 @@
       render();
       window.addEventListener('hashchange', render);
     };
-
     if (window.DATE_CATALOG) boot(window.DATE_CATALOG);
-    else {
-      fetch('./dates.json')
-        .then((res) => res.ok ? res.json() : Promise.reject())
-        .then(boot)
-        .catch(() => {
-          $('#app').innerHTML = '<p>Could not load Kolkata places. Try refreshing.</p>';
-        });
-    }
   </script>
 </body>
 </html>
