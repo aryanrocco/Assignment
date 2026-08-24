@@ -5,6 +5,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 
+Route::get('/resume', function () {
+    $path = public_path('resume.html');
+    abort_unless(is_file($path), 404);
+
+    return response()->file($path);
+})->name('resume');
+
 // Public blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
